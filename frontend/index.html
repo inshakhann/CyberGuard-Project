@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CyberGuard Dashboard</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>CyberGuard</h1>
+    <p>Login Monitoring & Intrusion Detection System</p>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <h2>Users</h2>
+      {{USERS_TABLE}}
+    </section>
+
+    <section class="card">
+      <h2>Simulate Login Attempt</h2>
+      <form class="form" method="post" action="/login">
+        <label>IP Address
+          <input name="ip" placeholder="192.168.1.10" required />
+        </label>
+        <label>Username
+          <input name="username" placeholder="alice" required />
+        </label>
+        <label>Password
+          <input name="password" type="password" placeholder="password" required />
+        </label>
+        <button type="submit">Submit Attempt</button>
+      </form>
+      <div class="hint">Attempts are queued; process via CLI or server action.</div>
+    </section>
+
+    <section class="card">
+      <h2>Threats (Top)</h2>
+      {{THREATS_TABLE}}
+    </section>
+
+    <section class="card">
+      <h2>Analytics</h2>
+      {{ANALYTICS_BLOCK}}
+    </section>
+
+    <section class="card wide">
+      <h2>Attack Graph Traversal</h2>
+      <form class="form inline" method="get" action="/graph">
+        <label>Start Node
+          <input name="start" placeholder="IP:192.168.1.10" required />
+        </label>
+        <label>Mode
+          <select name="mode">
+            <option value="bfs">BFS</option>
+            <option value="dfs">DFS</option>
+          </select>
+        </label>
+        <button type="submit">Traverse</button>
+      </form>
+      <pre class="mono">{{GRAPH_OUTPUT}}</pre>
+      <div class="hint">Node IDs: IP:x.x.x.x and U:username</div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>CyberGuard — academic project (C++17 custom data structures)</small>
+  </footer>
+</body>
+</html>
